@@ -1,0 +1,453 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f3f4f6;
+  --surface: #ffffff;
+  --surface-alt: #f8f9fa;
+  --line: #dfe2e6;
+  --text: #1a1d21;
+  --muted: #5f6771;
+  --accent: #1457d1;
+  --accent-soft: #e8effc;
+  --live: #c4281c;
+  --notice-bg: #fff6df;
+  --notice-text: #6a4b00;
+  --league-pass: #c8102e;
+  --espn-2: #8a6d00;
+  --disney-plus: #1a3e9c;
+  --prime-video: #00739d;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111418;
+    --surface: #1a1e23;
+    --surface-alt: #20252b;
+    --line: #2f353c;
+    --text: #eceef1;
+    --muted: #a0a8b2;
+    --accent: #7eaaff;
+    --accent-soft: #1f2d47;
+    --live: #ff8a80;
+    --notice-bg: #33290f;
+    --notice-text: #f2d58a;
+    --league-pass: #ff7b8e;
+    --espn-2: #e0c04d;
+    --disney-plus: #93b2ff;
+    --prime-video: #5fc8ec;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.4 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 14px;
+}
+
+.brand {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.tagline {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Filtros */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.search {
+  flex: 1 1 220px;
+  max-width: 320px;
+}
+
+.search input {
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.platform-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  --chip: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0 9px;
+  height: 36px;
+}
+
+.chip::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--chip);
+}
+
+.chip[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  font-weight: 600;
+}
+
+.chip-static {
+  height: 24px;
+  padding: 0 7px;
+  font-size: 12.5px;
+  background: var(--surface-alt);
+}
+
+.platform-league-pass { --chip: var(--league-pass); }
+.platform-espn-2 { --chip: var(--espn-2); }
+.platform-disney-plus { --chip: var(--disney-plus); }
+.platform-prime-video { --chip: var(--prime-video); }
+
+/* Navegação por dia */
+.day-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+
+.day-strip {
+  display: flex;
+  flex: 1 1 0;
+  min-width: 0;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.day-button {
+  flex: 1 0 58px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px 2px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.day-button[aria-current='date'] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--surface);
+}
+
+.day-weekday {
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.day-date {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.day-arrow {
+  flex: 0 0 36px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-size: 18px;
+}
+
+.day-arrow:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.link-button {
+  background: none;
+  border: 0;
+  padding: 6px 4px;
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* Tabela */
+.day-section {
+  margin-bottom: 18px;
+}
+
+.day-title {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.day-title::first-letter {
+  text-transform: uppercase;
+}
+
+.today-mark {
+  color: var(--accent);
+}
+
+.notice {
+  margin: 0 0 8px;
+  padding: 8px 10px;
+  background: var(--notice-bg);
+  color: var(--notice-text);
+  border-radius: 4px;
+}
+
+.game-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.game-table th {
+  padding: 7px 10px;
+  background: var(--surface-alt);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.game-table th:nth-child(1) { width: 78px; }
+.game-table th:nth-child(2) { width: 112px; }
+.game-table th:nth-child(5) { width: 37%; }
+
+.game-table th,
+.game-table td {
+  border: 1px solid var(--line);
+}
+
+.game-table td {
+  padding: 6px 10px;
+}
+
+.time-cell {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.status-cell {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.is-live .status-cell {
+  color: var(--live);
+  font-weight: 600;
+}
+
+.is-next {
+  background: var(--accent-soft);
+}
+
+.is-next .status-cell {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.is-finished .team,
+.is-finished .time-cell,
+.is-finished .platforms,
+.is-canceled .team,
+.is-canceled .time-cell,
+.is-canceled .platforms {
+  opacity: 0.6;
+}
+
+.team {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.team picture {
+  display: contents;
+}
+
+.team-logo {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.team-logo-fallback {
+  display: grid;
+  place-items: center;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.team-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.platforms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.message {
+  padding: 24px 12px;
+  text-align: center;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.message p {
+  margin: 0 0 4px;
+}
+
+.site-footer {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Celular: cada jogo vira um bloco, mantendo as divisórias de planilha. */
+@media (max-width: 680px) {
+  .page {
+    padding: 12px;
+  }
+
+  .search {
+    flex-basis: 100%;
+    max-width: none;
+  }
+
+  .platform-filter {
+    flex-wrap: nowrap;
+    width: calc(100% + 24px);
+    margin: 0 -12px;
+    padding: 0 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .chip {
+    flex: none;
+  }
+
+  .link-button {
+    flex-basis: 100%;
+  }
+
+  .game-table,
+  .game-table tbody {
+    display: block;
+  }
+
+  .game-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .game-row {
+    display: grid;
+    grid-template-columns: 62px minmax(0, 1fr);
+    grid-template-areas:
+      'time away'
+      'status home'
+      'status platforms';
+    padding: 8px 10px;
+    column-gap: 8px;
+    row-gap: 3px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .game-row:last-child {
+    border-bottom: 0;
+  }
+
+  .game-table td {
+    border: 0;
+    padding: 0;
+  }
+
+  .time-cell { grid-area: time; align-self: center; }
+  .status-cell { grid-area: status; font-size: 11.5px; }
+  .away-cell { grid-area: away; }
+  .home-cell { grid-area: home; }
+  .platforms-cell { grid-area: platforms; padding-top: 4px !important; }
+}
